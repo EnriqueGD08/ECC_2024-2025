@@ -1,0 +1,24 @@
+//Multiplexor de 4 entradas de un bit a una salida de un bit
+
+module mux4_1(output reg out, input wire a, b, c, d, input wire[1:0] S);
+
+//Para cada uno de los valores que puede tener S, se le da el valor a out que le corresponde
+  //Simpre que alguno de los valores de entrada cambie, se modificará (o no) el valor de salida
+  always @(a or b or c or d or S)
+    case(S)
+      2'b00: out = a;
+      2'b01: out = b;
+      2'b10: out = c;
+      2'b11: out = d;
+      //Si ocurre algún error, se devulve x
+      default: out = 1'bx;
+    endcase
+
+endmodule
+
+//Forma estructural
+// module mux4_1(output wire out, input wire a, b, c, d, input wire[1:0] S);
+
+//   assign out = S[1] ? (S[0] ? d : c) : (S[0] ? b : a);
+
+// endmodule
